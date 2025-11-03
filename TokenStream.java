@@ -190,8 +190,7 @@ public class TokenStream {
 	}
 
 	private boolean isKeyword(String s) {
-		// TODO TO BE COMPLETED 
-		return false;
+		return (s.equals("bool") || s.equals("else") || s.equals("if") || s.equals("integer") || s.equals("while") || s.equals("main"));
 	}
 
 	private boolean isWhiteSpace(char c) {
