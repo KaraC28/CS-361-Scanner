@@ -18,7 +18,7 @@ public class TokenStream {
 
 	// Instance variables 
 	private boolean isEof = false; // is end of file
-	private char nextChar = ' '; // next character in input stream
+	private char nextChar = ' '; // next character in input stream, this is just initialization
 	private BufferedReader input;
 
 	// This function was added to make the demo file work
@@ -80,6 +80,8 @@ public class TokenStream {
 				// >=
 			case '=':
 				// ==
+			case ':':
+			    // :=
 			case '!':
 				// !=
 				nextChar = readChar();
