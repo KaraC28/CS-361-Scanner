@@ -1,7 +1,7 @@
 
 /**
- * @author scharffc
- * 
+ * @author Sophia Chau
+ * @author Kara Cho
  */
 public class ScannerDemo {
 
