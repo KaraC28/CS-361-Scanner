@@ -56,11 +56,9 @@ public class TokenStream {
 			nextChar = readChar();
 			if (nextChar == '/') { // If / is followed by another /
 				// skip rest of line - it's a comment.
-				// TODO TO BE COMPLETED
-				while (!isEof && !isEndofFile(nextChar)) {
+				while (!isEof && !isEndOfLine(nextChar)) {
 					nextChar = readChar();
 				}
-				nextChar = readChar();
 				skipWhiteSpace();
 		
 				// look for <cr>, <lf>, <ff>
@@ -101,6 +99,9 @@ public class TokenStream {
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
 				}
+				else{
+					t.setType("Other");
+				}
 				return t;
 			case ':':
 			    nextChar = readChar();
@@ -117,8 +118,6 @@ public class TokenStream {
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
 				}
-				return t;
-				nextChar = readChar();
 				return t;
 			case '|':
 				// Look for ||
@@ -171,7 +170,7 @@ public class TokenStream {
 			// now see if this is a keyword
 			if (isKeyword(t.getValue())) {
 				t.setType("Keyword");
-			} else if (t.getValue().equals("true") || t.getValue().equals("false")) {
+			} else if (t.getValue().equals("True") || t.getValue().equals("False")) {
 				t.setType("Literal");
 			}
 			if (isEndOfToken(nextChar)) { // If token is valid, returns.
