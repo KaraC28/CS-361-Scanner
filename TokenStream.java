@@ -78,7 +78,6 @@ public class TokenStream {
 			t.setType("Operator");
 			t.setValue(t.getValue() + nextChar);
 			switch (nextChar) {
-			// TODO TO BE COMPLETED WHERE NEEDED
 			case '<':
 				nextChar = readChar();
 				if (nextChar == '=') {
