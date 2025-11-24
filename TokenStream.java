@@ -57,6 +57,12 @@ public class TokenStream {
 			if (nextChar == '/') { // If / is followed by another /
 				// skip rest of line - it's a comment.
 				// TODO TO BE COMPLETED
+				while (!isEof && !isEndofFile(nextChar)) {
+					nextChar = readChar();
+				}
+				nextChar = readChar();
+				skipWhiteSpace();
+		
 				// look for <cr>, <lf>, <ff>
 
 			} else {
@@ -66,6 +72,7 @@ public class TokenStream {
 				return t;
 			}
 		}
+		
 
 		// Then check for an operator; this part of the code should recover 2-character
 		// operators as well as 1-character ones.
@@ -75,15 +82,42 @@ public class TokenStream {
 			switch (nextChar) {
 			// TODO TO BE COMPLETED WHERE NEEDED
 			case '<':
-				// <=
+				nextChar = readChar();
+				if (nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+					nextChar = readChar();
+				}
+				return t;
 			case '>':
-				// >=
+				nextChar = readChar();
+				if (nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+					nextChar = readChar();
+				}
+				return t;
 			case '=':
-				// ==
+				nextChar = readChar();
+				if (nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+					nextChar = readChar();
+				}
+				return t;
 			case ':':
-			    // :=
+			    nextChar = readChar();
+				if (nextChar == '=') {          
+					t.setValue(t.getValue() + nextChar);
+					nextChar = readChar();
+				} else {
+					t.setType("Other");
+				}
+				return t;
 			case '!':
-				// !=
+				nextChar = readChar();
+				if (nextChar == '=') {          
+					t.setValue(t.getValue() + nextChar);
+					nextChar = readChar();
+				}
+				return t;
 				nextChar = readChar();
 				return t;
 			case '|':
@@ -121,6 +155,8 @@ public class TokenStream {
 		if (isSeparator(nextChar)) {
 			t.setType("Separator");
 			// TODO TO BE COMPLETED
+			t.setValue("" + nextChar);
+			nextChar = readChar();
 			return t;
 		}
 
