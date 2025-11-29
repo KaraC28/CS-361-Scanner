@@ -1,3 +1,4 @@
+//Team 5: Sophia Chau, Kara Cho
 // ConcreteSyntax.java
 
 // Implementation of the Recursive Descent Parser algorithm
@@ -156,7 +157,7 @@ public class ConcreteSyntax {
 		if (token.getType().equals("Identifier")) {
 			// TODO TO BE COMPLETED
 			a.target = new Variable();
-			a.target.id = token.getValue();
+			a.target.id = token.getValue(); 
 			token = input.nextToken();
 			match(":=");
 			a.source = expression();
@@ -211,15 +212,16 @@ public class ConcreteSyntax {
 				|| token.getValue().equals(">")
 				|| token.getValue().equals(">=")
 				|| token.getValue().equals("==")
-				|| token.getValue().equals("<>")) {
+				|| token.getValue().equals("<")
+				|| token.getValue().equals("!=")){
 			b = new Binary();
 			b.term1 = e;
 			b.op = new Operator(token.getValue());
 			token = input.nextToken();
 			b.term2 = addition();
 			e = b;
-			}
-			return e;
+		}
+		return e;
 	}
 
 	private Expression addition() {
@@ -282,9 +284,9 @@ public class ConcreteSyntax {
 			Value v = null;
 			if (isInteger(token.getValue()))
 				v = new Value((new Integer(token.getValue())).intValue());
-			else if (token.getValue().equals("true"))
+			else if (token.getValue().equals("True"))
 				v = new Value(true);
-			else if (token.getValue().equals("false"))
+			else if (token.getValue().equals("False"))
 				v = new Value(false);
 			else
 				throw new RuntimeException(SyntaxError("Literal"));
@@ -307,10 +309,10 @@ public class ConcreteSyntax {
 		match("(");
 		c.test = expression();
 		match(")");
-		c.truebranch = statement();
+		c.thenbranch = statement();
 		if (token.getValue().equals("else")) {
 			token = input.nextToken();
-			c.falsebranch = statement();
+			c.elsebranch = statement();
 		}
 		return c;
 	}
