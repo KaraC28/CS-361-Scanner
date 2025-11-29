@@ -1,3 +1,4 @@
+package com.scanner.project;
 //Team 5: Sophia Chau, Kara Cho
 // ConcreteSyntax.java
 
